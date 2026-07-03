@@ -346,7 +346,7 @@ html, body {
   width: calc(100% - 20px);
   aspect-ratio: 371 / 507;
   border-radius: 16px;
-  background: var(--paper);
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -357,11 +357,15 @@ html, body {
   flex-shrink: 0;
 }
 /* The card shows a blurred preview of the postcard BACK (logo + handwritten
-   lines), not the front photo — matching the design: the message side is
-   what's "developing" and being teased, not the captured photo itself. */
+   lines) inset with a black border/mat, not the front photo edge-to-edge —
+   matching the design: the message side is what's "developing" and being
+   teased, not the captured photo itself. */
 .developing-preview {
   position: absolute;
-  inset: 0;
+  inset: 14px;
+  border-radius: 8px;
+  background: var(--paper);
+  overflow: hidden;
   filter: blur(6px);
   opacity: 0.85;
 }
