@@ -346,7 +346,7 @@ html, body {
   width: calc(100% - 20px);
   aspect-ratio: 371 / 507;
   border-radius: 16px;
-  background: #1a1a1a;
+  background: var(--paper);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -356,16 +356,14 @@ html, body {
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   flex-shrink: 0;
 }
-/* The card shows the actual captured photo, heavily blurred and darkened,
-   behind the stamp — matching the design (not a plain placeholder card). */
-.developing-card::before {
-  content: "";
+/* The card shows a blurred preview of the postcard BACK (logo + handwritten
+   lines), not the front photo — matching the design: the message side is
+   what's "developing" and being teased, not the captured photo itself. */
+.developing-preview {
   position: absolute;
-  inset: -12px;
-  background-image: url("assets/scene-capture.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: blur(9px) brightness(0.55);
+  inset: 0;
+  filter: blur(6px);
+  opacity: 0.85;
 }
 .developing-stamp {
   position: relative;
