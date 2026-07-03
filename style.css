@@ -367,18 +367,6 @@ html, body {
   background-position: center;
   filter: blur(9px) brightness(0.55);
 }
-.developing-card::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.09) 45%, transparent 70%);
-  background-size: 220% 220%;
-  animation: shimmer 3s ease-in-out infinite;
-}
-@keyframes shimmer {
-  0% { background-position: 130% 130%; }
-  50% { background-position: 0% 0%; }
-  100% { background-position: 130% 130%; }
-}
 .developing-stamp {
   position: relative;
   z-index: 1;
@@ -402,7 +390,6 @@ html, body {
   text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 .developing-card.wobble { animation: wobble 0.3s ease; }
-body.anim-paused .developing-card::after { animation-play-state: paused; }
 @keyframes wobble {
   0% { transform: rotate(0); }
   25% { transform: rotate(-3deg); }
@@ -802,7 +789,6 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
   .reveal-dissolve {
     animation: none !important;
   }
-  .developing-card::after { animation: none !important; opacity: 0.15; }
   .developing-card.wobble { animation: none !important; }
   .flip-card { transition: opacity 0.25s ease !important; }
   .flip-card.flipped { transform: none !important; }

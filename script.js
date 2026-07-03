@@ -347,11 +347,6 @@
     el.addEventListener("click", () => devpanel.classList.toggle("open"));
   });
 
-  // ---------- background pause for looping animation (battery/perf spec) ----------
-  document.addEventListener("visibilitychange", () => {
-    document.body.classList.toggle("anim-paused", document.hidden);
-  });
-
   // ---------- init ----------
   applyZigzagBorders();
   showScreen("explainer-front");
