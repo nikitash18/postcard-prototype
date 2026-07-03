@@ -387,17 +387,6 @@ html, body {
   color: rgba(255,255,255,0.55);
   transform: rotate(-14deg);
 }
-.developing-timer {
-  margin-top: 16px;
-  font-variant-numeric: tabular-nums;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.06);
-  padding: 4px 10px;
-  border-radius: 20px;
-}
 .developing-card.wobble { animation: wobble 0.3s ease; }
 body.anim-paused .developing-card::after { animation-play-state: paused; }
 @keyframes wobble {
@@ -413,6 +402,19 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
   color: var(--ink-dim);
   margin: 14px 30px 10px;
 }
+.exit-app-link {
+  display: block;
+  margin: 18px auto 0;
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.exit-app-link:active { opacity: 0.6; }
 
 .pill-btn {
   margin: 0 auto;

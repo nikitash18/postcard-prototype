@@ -116,7 +116,23 @@
       track("postcard_revealed");
       resetFlip();
     }
+    if (name === "home-empty") {
+      if (suppressNextForceCapture) {
+        suppressNextForceCapture = false;
+      } else {
+        // Step 3: the forced capture overlay enforces itself the moment the
+        // user lands on the empty feed — not something they opt into.
+        clearTimeout(forceCaptureHandle);
+        forceCaptureHandle = setTimeout(() => {
+          if (currentScreen !== "home-empty") return;
+          cameraContext = "home_feed_fallback";
+          showScreen("camera");
+        }, 900);
+      }
+    }
   }
+  let forceCaptureHandle = null;
+  let suppressNextForceCapture = false;
 
   // ---------- typewriter (50-150ms/char, skips if reduced motion) ----------
   // Plays once total across the whole session (not once per screen instance),
@@ -218,13 +234,14 @@
     permissionDenials++;
     document.querySelector('[data-screen="camera"] [data-modal="permission"]').hidden = true;
     if (permissionDenials >= 2) {
-      showScreen("home-empty"); // stop asking, return to main feed
+      // "Stop asking" — land on a quiet feed, don't immediately re-force the camera.
+      suppressNextForceCapture = true;
+      showScreen("home-empty");
     }
   });
 
   // ---------- developing state ----------
   const developingCard = document.querySelector(".developing-card");
-  const timerEl = document.getElementById("developing-timer");
 
   developingCard.addEventListener("click", () => {
     if (unlocked) return;
@@ -237,28 +254,25 @@
     // non-blocking fallback — no-op in this prototype, matches "resilient, non-blocking" design rationale
   });
 
+  // "Exit to Home Screen" simulates the user closing the app (Step 5: closing
+  // the app establishes the Information Gap). A beat later, the Day 1 push
+  // notification fires — matching the real 24h lock without the actual wait.
+  document.querySelector('[data-action="exit-app"]').addEventListener("click", () => {
+    developingStartedAt = Date.now() - DEV_DURATION_MS;
+  });
+
   function startDevelopingTimer() {
     if (developingTimerHandle) clearInterval(developingTimerHandle);
     if (!developingStartedAt) developingStartedAt = Date.now();
 
     function tick() {
       const elapsed = Date.now() - developingStartedAt;
-      const remaining = Math.max(0, DEV_DURATION_MS - elapsed);
-      const pct = remaining / DEV_DURATION_MS;
-      // display as a fake 24h countdown scaled to the compressed timer, purely cosmetic
-      const totalSeconds = Math.round(pct * 24 * 3600);
-      const hh = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-      const mm = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-      const ss = String(totalSeconds % 60).padStart(2, "0");
-      if (timerEl) timerEl.textContent = `${hh}:${mm}:${ss}`;
-
-      if (remaining <= 0) {
+      if (elapsed >= DEV_DURATION_MS) {
         clearInterval(developingTimerHandle);
         unlocked = true;
         goToLockscreen();
       }
     }
-    tick();
     developingTimerHandle = setInterval(tick, 250);
   }
 
