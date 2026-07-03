@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>BeReal x Nikita — The Postcard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="stage">
+  <div class="phone" id="phone">
+    <div class="notch"></div>
+
+    <!-- ===== Status bar (present on most screens) ===== -->
+    <div class="statusbar" id="statusbar">
+      <span class="statusbar-time">9:41</span>
+      <span class="statusbar-icons">
+        <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="0.5" fill="currentColor"/><rect x="4.5" y="5" width="3" height="7" rx="0.5" fill="currentColor"/><rect x="9" y="2.5" width="3" height="9.5" rx="0.5" fill="currentColor"/><rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="currentColor"/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M8 10.5C8.7 10.5 9.3 9.9 9.3 9.2C9.3 8.5 8.7 7.9 8 7.9C7.3 7.9 6.7 8.5 6.7 9.2C6.7 9.9 7.3 10.5 8 10.5Z" fill="currentColor"/><path d="M4.8 7.2C5.7 6.3 6.8 5.9 8 5.9C9.2 5.9 10.3 6.3 11.2 7.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M2 4.3C3.8 2.5 5.8 1.6 8 1.6C10.2 1.6 12.2 2.5 14 4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="14" height="8" rx="1" fill="currentColor"/><path d="M22 4V8C22.8 7.6 23.3 6.9 23.3 6C23.3 5.1 22.8 4.4 22 4Z" fill="currentColor"/></svg>
+      </span>
+    </div>
+
+    <!-- ===== SCREEN 1: Explainer (front) ===== -->
+    <section class="screen active" data-screen="explainer-front">
+      <header class="bar">
+        <span class="bar-spacer"></span>
+        <span class="wordmark">BeReal.</span>
+        <button class="skip-btn" data-action="skip">Skip</button>
+      </header>
+      <p class="explainer-copy" data-typewriter="Snap a photo. Come back tomorrow to reveal your developed postcard and share it with your friends!"></p>
+      <div class="explainer-card" data-action="flip-explainer">
+        <div class="composite-photo demo-photo-a">
+          <img class="inset-photo" src="assets/inset-a.svg" alt="" />
+        </div>
+        <span class="tap-hint">Tap to flip</span>
+      </div>
+      <button class="cta-btn" data-action="start-flow">START</button>
+    </section>
+
+    <!-- ===== SCREEN 2: Explainer (back / postcard preview) ===== -->
+    <section class="screen" data-screen="explainer-back">
+      <header class="bar">
+        <span class="bar-spacer"></span>
+        <span class="wordmark">BeReal.</span>
+        <button class="skip-btn" data-action="skip">Skip</button>
+      </header>
+      <p class="explainer-copy" data-typewriter="Snap a photo. Come back tomorrow to reveal your developed postcard and share it with your friends!"></p>
+      <div class="postcard postcard--explainer" data-action="flip-explainer">
+        <img class="postcard-thumb" src="assets/inset-a.svg" alt="" />
+        <span class="tap-hint tap-hint--top">Flip back</span>
+        <div class="postcard-lines">
+          <div class="pc-col pc-col--left">
+            <div class="pc-line">To: my fav</div>
+            <div class="pc-line">person ever</div>
+          </div>
+          <div class="pc-col pc-col--right">
+            <div class="pc-line">Life lately.</div>
+            <div class="pc-line">Can't wait to</div>
+            <div class="pc-line">see you soon.</div>
+            <div class="pc-line">Come join?</div>
+            <div class="pc-stampdate">@nikitashh<br/>june 07,2026<br/>bereal.</div>
+          </div>
+        </div>
+      </div>
+      <button class="cta-btn" data-action="start-flow">START</button>
+    </section>
+
+    <!-- ===== SCREEN 3: Camera / Blind Capture ===== -->
+    <section class="screen" data-screen="camera">
+      <div class="camera-card">
+        <div class="camera-viewport" data-photo="scene-a"></div>
+      </div>
+      <div class="camera-controls">
+        <div class="mode-toggle">
+          <span class="mode-toggle-item">VIDEO</span>
+          <span class="mode-toggle-item mode-toggle-item--active">PHOTO</span>
+        </div>
+        <button class="shutter-btn" data-action="capture" aria-label="Capture"></button>
+      </div>
+
+      <!-- Edge case: camera permission denied modal -->
+      <div class="modal-overlay" data-modal="permission" hidden>
+        <div class="modal">
+          <p class="modal-title">We need camera access to capture your moment.</p>
+          <p class="modal-body">Please enable camera access in your settings so you can snap and send your daily postcard.</p>
+          <button class="modal-link" data-action="permission-settings">Go to Settings</button>
+          <button class="modal-link" data-action="permission-deny">Don't Allow</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 4: Post-capture / Save ===== -->
+    <section class="screen" data-screen="postcapture">
+      <header class="bar">
+        <span class="bar-spacer"></span>
+        <span class="wordmark">BeReal.</span>
+        <button class="skip-btn" data-action="discard">Skip</button>
+      </header>
+      <div class="camera-card">
+        <div class="camera-viewport" data-photo="scene-a">
+          <img class="inset-photo" src="assets/inset-a.svg" alt="" />
+        </div>
+      </div>
+      <button class="cta-btn cta-btn--save" data-action="save">SAVE</button>
+
+      <!-- Edge case: upload failure modal -->
+      <div class="modal-overlay" data-modal="upload-error" hidden>
+        <div class="modal">
+          <p class="modal-title">Something went wrong.</p>
+          <p class="modal-body">We couldn't save your postcard. Please check your connection and try again.</p>
+          <button class="modal-link" data-action="retry-save">Try again</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 5: Developing (home feed) ===== -->
+    <section class="screen" data-screen="developing">
+      <header class="bar">
+        <button class="icon-btn icon-btn--ghost" aria-label="Friends">☺</button>
+        <span class="wordmark">BeReal.</span>
+        <span class="avatar-dot"></span>
+      </header>
+      <div class="developing-card" data-action="wobble-check">
+        <div class="developing-stamp">DEVELOPING</div>
+        <div class="developing-tagline">Come back tomorrow!</div>
+        <div class="developing-timer" id="developing-timer">24:00:00</div>
+      </div>
+      <p class="developing-copy">Postcard is developing. Who are you sending it to?</p>
+      <button class="pill-btn" data-action="add-friends">Add friends</button>
+
+      <button class="recent-photos-pill" data-action="restart-demo">View recent photos</button>
+    </section>
+
+    <!-- ===== SCREEN 6: Lock screen notification ===== -->
+    <section class="screen" data-screen="lockscreen">
+      <div class="lockscreen">
+        <div class="lockscreen-lock">🔓</div>
+        <div class="lockscreen-time">9:41</div>
+        <div class="lockscreen-date">Tuesday, 23 June</div>
+        <div class="notif-banner" id="notif-banner" data-action="open-notification">
+          <img class="notif-icon" src="assets/inset-a.svg" alt="" />
+          <div class="notif-text">
+            <div class="notif-title-row">
+              <span class="notif-title">Your postcard is ready 💌</span>
+              <span class="notif-time">3m ago</span>
+            </div>
+            <span class="notif-sub">Tap to reveal yesterday's memory and share with friends!</span>
+          </div>
+        </div>
+        <div class="lockscreen-actions">
+          <span>⚑</span>
+          <span>◎</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 7: Reveal - front ===== -->
+    <section class="screen" data-screen="reveal-front">
+      <header class="bar bar--overlay">
+        <span class="bar-spacer"></span>
+        <span class="wordmark">BeReal.</span>
+        <span class="bar-spacer"></span>
+      </header>
+      <div class="flip-container">
+        <div class="flip-card" id="flip-card" data-action="flip-reveal">
+          <div class="flip-face flip-face--front">
+            <div class="camera-viewport camera-viewport--card reveal-dissolve" data-photo="scene-a" id="reveal-photo">
+              <img class="inset-photo" src="assets/inset-a.svg" alt="" />
+            </div>
+            <span class="tap-hint tap-hint--floating">Tap to flip</span>
+          </div>
+          <div class="flip-face flip-face--back">
+            <div class="postcard postcard--reveal">
+              <img class="postcard-thumb" src="assets/inset-a.svg" alt="" />
+              <span class="tap-hint tap-hint--top">Flip back</span>
+              <div class="postcard-lines" id="postcard-lines-back2">
+                <div class="pc-col pc-col--left">
+                  <div class="pc-line pc-fade">To: my fav</div>
+                  <div class="pc-line pc-fade">person ever</div>
+                </div>
+                <div class="pc-col pc-col--right">
+                  <div class="pc-line pc-fade">Life lately.</div>
+                  <div class="pc-line pc-fade">Can't wait to</div>
+                  <div class="pc-line pc-fade">see you soon.</div>
+                  <div class="pc-line pc-fade">Come join?</div>
+                  <div class="pc-stampdate pc-fade">@nikitashh<br/>june 07,2026<br/>bereal.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="cta-btn cta-btn--share" data-action="share">Share</button>
+
+      <!-- Edge case: share failure modal -->
+      <div class="modal-overlay" data-modal="share-error" hidden>
+        <div class="modal">
+          <p class="modal-title">Something went wrong.</p>
+          <p class="modal-body">We couldn't export your postcard. Please check your connection and try again.</p>
+          <button class="modal-link" data-action="retry-share">Try again</button>
+        </div>
+      </div>
+
+      <!-- native-style share sheet -->
+      <div class="share-sheet-overlay" data-action="close-share-sheet" hidden id="share-sheet">
+        <div class="share-sheet" data-stop>
+          <div class="share-sheet-handle"></div>
+          <div class="share-sheet-preview">
+            <div class="composite-photo demo-photo-a small"><img class="inset-photo" src="assets/inset-a.svg" alt="" /></div>
+            <span>Postcard.png</span>
+          </div>
+          <div class="share-sheet-row">
+            <div class="share-sheet-app"><span class="share-sheet-icon">✉</span>Messages</div>
+            <div class="share-sheet-app"><span class="share-sheet-icon">◎</span>Instagram</div>
+            <div class="share-sheet-app"><span class="share-sheet-icon">＋</span>More</div>
+          </div>
+          <button class="share-sheet-cancel" data-action="close-share-sheet">Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 8: Empty home feed fallback ===== -->
+    <section class="screen" data-screen="home-empty">
+      <header class="bar">
+        <button class="icon-btn icon-btn--ghost" aria-label="Friends">☺</button>
+        <span class="wordmark">BeReal.</span>
+        <span class="avatar-dot"></span>
+      </header>
+      <div class="empty-state">
+        <p class="empty-title">Wow, it's really calm in here!</p>
+        <p class="empty-body">Your friends haven't posted their BeReal yet, be the first one.</p>
+        <button class="pill-btn" data-action="force-capture">Take your BeReal</button>
+      </div>
+      <button class="recent-photos-pill" data-action="restart-demo">View recent photos</button>
+    </section>
+
+    <!-- ===== SCREEN 9: Home feed w/ saved postcard (final) ===== -->
+    <section class="screen" data-screen="home-final">
+      <header class="bar">
+        <button class="icon-btn icon-btn--ghost" aria-label="Friends">☺</button>
+        <span class="wordmark">BeReal.</span>
+        <span class="avatar-dot"></span>
+      </header>
+      <div class="filmroll-teaser">
+        <span class="filmroll-label">Your film roll</span>
+        <div class="filmroll-strip">
+          <div class="filmroll-thumb filmroll-thumb--filled"><img class="inset-photo" src="assets/inset-a.svg" alt="" /></div>
+          <div class="filmroll-thumb filmroll-thumb--next" data-action="restart-demo">+</div>
+        </div>
+        <p class="filmroll-caption">Saved to your profile. Come back tomorrow to keep the roll going.</p>
+      </div>
+      <button class="recent-photos-pill" data-action="restart-demo">View recent photos</button>
+    </section>
+
+  </div>
+
+  <!-- Dev-only analytics + fast-forward panel (toggle with the ⚙ tab) -->
+  <div class="devpanel" id="devpanel">
+    <div class="devpanel-header">
+      <span>Prototype controls</span>
+      <button class="devpanel-close" data-action="toggle-devpanel">×</button>
+    </div>
+    <button class="devpanel-btn" data-action="skip-timer">⏩ Skip developing timer</button>
+    <button class="devpanel-btn" data-action="show-permission-modal">🚫 Camera permission denied</button>
+    <button class="devpanel-btn" data-action="show-save-error">⚠️ Save/upload failed</button>
+    <button class="devpanel-btn" data-action="show-share-error-demo">⚠️ Share/export failed</button>
+    <button class="devpanel-btn" data-action="restart-demo">↺ Restart prototype</button>
+    <div class="devpanel-log-label">Analytics events</div>
+    <div class="devpanel-log" id="devpanel-log"></div>
+  </div>
+  <button class="devpanel-toggle" data-action="toggle-devpanel">⚙</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
