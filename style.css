@@ -715,14 +715,17 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
 .devpanel-toggle {
   position: fixed;
   bottom: 20px; right: 20px;
-  width: 42px; height: 42px;
-  border-radius: 50%;
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 21px;
   background: #1c1c1e;
   color: #fff;
   border: 1px solid rgba(255,255,255,0.15);
-  font-size: 17px;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 .devpanel {
   position: fixed;

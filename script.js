@@ -119,18 +119,20 @@
   }
 
   // ---------- typewriter (50-150ms/char, skips if reduced motion) ----------
+  // Plays once total across the whole session (not once per screen instance),
+  // so flipping between the explainer front/back doesn't replay it.
+  let typewriterPlayed = false;
   function runTypewriter(el) {
-    if (!el || el.dataset.done === "true") {
-      if (el) el.textContent = el.dataset.typewriter || el.textContent;
-      return;
-    }
+    if (!el) return;
     const text = el.dataset.typewriter || "";
-    el.textContent = "";
-    if (reduceMotion) {
+    if (typewriterPlayed || reduceMotion) {
       el.textContent = text;
-      el.dataset.done = "true";
       return;
     }
+    // Mark as played immediately (not on completion) so flipping mid-animation
+    // doesn't trigger a second, independent typewriter run on the other element.
+    typewriterPlayed = true;
+    el.textContent = "";
     const cursor = document.createElement("span");
     cursor.className = "cursor";
     cursor.textContent = "|";
@@ -138,10 +140,7 @@
     function tick() {
       el.textContent = text.slice(0, i);
       el.appendChild(cursor);
-      if (i >= text.length) {
-        el.dataset.done = "true";
-        return;
-      }
+      if (i >= text.length) return;
       i++;
       const delay = 50 + Math.random() * 100;
       setTimeout(tick, delay);
@@ -196,11 +195,9 @@
     setTimeout(() => flash.remove(), 240);
   }
 
-  // ---------- post-capture: save / discard ----------
-  document.querySelector('[data-action="discard"]').addEventListener("click", () => {
-    showScreen("camera");
-  });
-
+  // ---------- post-capture: save ----------
+  // Note: the post-capture "Skip" button reuses the global skip handler below
+  // (abandons the flow entirely), matching the onboarding Skip semantics.
   document.querySelector('[data-action="save"]').addEventListener("click", () => {
     developingStartedAt = Date.now();
     unlocked = false;
@@ -371,6 +368,7 @@
     el.addEventListener("click", () => {
       unlocked = false;
       developingStartedAt = null;
+      typewriterPlayed = false;
       if (developingTimerHandle) clearInterval(developingTimerHandle);
       document.querySelectorAll(".pc-fade").forEach((l) => l.classList.remove("pc-fade--in"));
       resetFlip();
