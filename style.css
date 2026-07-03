@@ -71,6 +71,18 @@ html, body {
   pointer-events: none;
 }
 
+/* iOS home indicator, present on every screen on Face ID-era iPhones */
+.home-indicator {
+  position: absolute;
+  bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 135px; height: 5px;
+  border-radius: 2.5px;
+  background: rgba(255,255,255,0.9);
+  z-index: 95;
+  pointer-events: none;
+}
+
 /* ===== Screens ===== */
 .screen {
   position: absolute;
@@ -365,8 +377,9 @@ html, body {
   position: relative;
   z-index: 1;
   font-weight: 900;
-  font-size: 34px;
-  letter-spacing: 0.02em;
+  font-size: 50px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
   color: rgba(255,255,255,0.92);
   transform: rotate(-20deg);
   text-shadow: 0 2px 12px rgba(0,0,0,0.6);
@@ -374,9 +387,10 @@ html, body {
 .developing-tagline {
   position: relative;
   z-index: 1;
-  margin-top: 8px;
-  font-size: 13px;
+  margin-top: 6px;
+  font-size: 15px;
   font-weight: 600;
+  white-space: nowrap;
   color: rgba(255,255,255,0.6);
   transform: rotate(-20deg);
   text-shadow: 0 1px 8px rgba(0,0,0,0.6);

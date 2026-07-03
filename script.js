@@ -25,7 +25,6 @@
   window.addEventListener("resize", fitPhoneToViewport);
 
   let currentScreen = "explainer-front";
-  let permissionDenials = 0;
   let developingStartedAt = null;
   let developingTimerHandle = null;
   let unlocked = false;
@@ -198,16 +197,16 @@
 
   // ---------- permission modal (dev-triggerable, wired for completeness) ----------
   document.querySelector('[data-action="permission-settings"]')?.addEventListener("click", () => {
+    // A web page can't deep-link into the iOS Settings app (only a native app
+    // can open its own settings page). We simulate the realistic outcome
+    // instead: the user enables it in Settings and returns with access granted.
     document.querySelector('[data-screen="camera"] [data-modal="permission"]').hidden = true;
   });
   document.querySelector('[data-action="permission-deny"]')?.addEventListener("click", () => {
-    permissionDenials++;
     document.querySelector('[data-screen="camera"] [data-modal="permission"]').hidden = true;
-    if (permissionDenials >= 2) {
-      // "Stop asking" — land on a quiet feed, don't immediately re-force the camera.
-      suppressNextForceCapture = true;
-      showScreen("home-empty");
-    }
+    // "Don't Allow" sends the user straight back to the feed.
+    suppressNextForceCapture = true;
+    showScreen("home-empty");
   });
 
   // ---------- developing state ----------

@@ -7,13 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=20260703-6" />
+<link rel="stylesheet" href="style.css?v=20260703-7" />
 </head>
 <body>
 
 <div class="stage">
   <div class="phone-frame" id="phone-frame">
   <div class="phone" id="phone">
+    <div class="home-indicator"></div>
 
     <!-- ===== Status bar (present on most screens) ===== -->
     <div class="statusbar" id="statusbar">
@@ -126,7 +127,9 @@
     <!-- ===== SCREEN 5: Developing (home feed) ===== -->
     <section class="screen" data-screen="developing">
       <header class="bar">
-        <button class="icon-btn icon-btn--ghost" aria-label="Friends">☺</button>
+        <button class="icon-btn icon-btn--ghost" aria-label="Friends">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><circle cx="7" cy="4" r="3.4" stroke="currentColor" stroke-width="1.4"/><circle cx="15.5" cy="5.2" r="2.6" stroke="currentColor" stroke-width="1.4"/><path d="M1 15c0-3.3 2.7-5.6 6-5.6s6 2.3 6 5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13.2 15c0-2.4 1.9-4.2 4.4-4.2s4.4 1.8 4.4 4.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
         <span class="wordmark">BeReal.</span>
         <span class="avatar-dot"></span>
       </header>
@@ -246,7 +249,9 @@
     <!-- ===== SCREEN 8: Empty home feed fallback ===== -->
     <section class="screen" data-screen="home-empty">
       <header class="bar">
-        <button class="icon-btn icon-btn--ghost" aria-label="Friends">☺</button>
+        <button class="icon-btn icon-btn--ghost" aria-label="Friends">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><circle cx="7" cy="4" r="3.4" stroke="currentColor" stroke-width="1.4"/><circle cx="15.5" cy="5.2" r="2.6" stroke="currentColor" stroke-width="1.4"/><path d="M1 15c0-3.3 2.7-5.6 6-5.6s6 2.3 6 5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13.2 15c0-2.4 1.9-4.2 4.4-4.2s4.4 1.8 4.4 4.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
         <span class="wordmark">BeReal.</span>
         <span class="avatar-dot"></span>
       </header>
@@ -275,7 +280,9 @@
     <!-- ===== SCREEN 9: Home feed w/ saved postcard (final) ===== -->
     <section class="screen" data-screen="home-final">
       <header class="bar">
-        <button class="icon-btn icon-btn--ghost" aria-label="Friends">☺</button>
+        <button class="icon-btn icon-btn--ghost" aria-label="Friends">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><circle cx="7" cy="4" r="3.4" stroke="currentColor" stroke-width="1.4"/><circle cx="15.5" cy="5.2" r="2.6" stroke="currentColor" stroke-width="1.4"/><path d="M1 15c0-3.3 2.7-5.6 6-5.6s6 2.3 6 5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13.2 15c0-2.4 1.9-4.2 4.4-4.2s4.4 1.8 4.4 4.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
         <span class="wordmark">BeReal.</span>
         <span class="avatar-dot"></span>
       </header>
@@ -324,6 +331,6 @@
   <button class="devpanel-toggle" data-action="toggle-devpanel">⚙ Demo controls</button>
 </div>
 
-<script src="script.js?v=20260703-6"></script>
+<script src="script.js?v=20260703-7"></script>
 </body>
 </html>
