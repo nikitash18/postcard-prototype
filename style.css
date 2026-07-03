@@ -260,7 +260,7 @@ html, body {
   text-align: right;
 }
 .pc-fade { opacity: 0; }
-.pc-fade.pc-fade--in { animation: fadeUp 0.4s ease both; }
+.pc-fade.pc-fade--in { animation: fadeUp 0.25s ease both; }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
@@ -482,6 +482,9 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
   border: none;
   cursor: pointer;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tabbar-item--profile { position: relative; }
 .tabbar-avatar {
@@ -489,6 +492,12 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
   width: 17px; height: 17px;
   border-radius: 50%;
   background: linear-gradient(135deg, #a35ce8, #6c2bd9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
 }
 .tabbar-dot {
   position: absolute;

@@ -272,7 +272,7 @@
     flipCard.classList.toggle("flipped");
     if (flipping) {
       const flipDuration = reduceMotion ? 0 : 700;
-      setTimeout(() => staggerTextReveal(), flipDuration + 300);
+      setTimeout(() => staggerTextReveal(), flipDuration + 150);
     } else {
       pcLines().forEach((l) => l.classList.remove("pc-fade--in"));
     }
@@ -280,7 +280,7 @@
 
   function staggerTextReveal() {
     pcLines().forEach((line, i) => {
-      setTimeout(() => line.classList.add("pc-fade--in"), reduceMotion ? 0 : i * 100);
+      setTimeout(() => line.classList.add("pc-fade--in"), reduceMotion ? 0 : i * 60);
     });
   }
 
