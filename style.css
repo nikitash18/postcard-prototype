@@ -146,14 +146,6 @@ html, body {
   padding: 4px 31px 18px;
   min-height: 4.6em;
 }
-.explainer-copy .cursor {
-  display: inline-block;
-  width: 1px;
-  margin-left: 1px;
-  background: var(--ink-dim);
-  animation: blink 0.9s steps(1) infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
 
 .explainer-card {
   position: relative;
@@ -788,7 +780,6 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
   .flip-face--back { transform: none !important; display: none; }
   .flip-card.flipped .flip-face--front { display: none; }
   .flip-card.flipped .flip-face--back { display: block; }
-  .explainer-copy .cursor { display: none; }
   .notif-banner { opacity: 1; transform: none; }
   .pc-fade { opacity: 1 !important; }
 }

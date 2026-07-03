@@ -103,7 +103,7 @@
   function onScreenShown(name) {
     if (name === "explainer-front" || name === "explainer-back") {
       const p = document.querySelector(`.screen[data-screen="${name}"] .explainer-copy`);
-      runTypewriter(p);
+      if (p) p.textContent = p.dataset.typewriter || "";
     }
     if (name === "camera") {
       track("analog_capture_viewed", { screen_type: cameraContext });
@@ -133,36 +133,6 @@
   }
   let forceCaptureHandle = null;
   let suppressNextForceCapture = false;
-
-  // ---------- typewriter (50-150ms/char, skips if reduced motion) ----------
-  // Plays once total across the whole session (not once per screen instance),
-  // so flipping between the explainer front/back doesn't replay it.
-  let typewriterPlayed = false;
-  function runTypewriter(el) {
-    if (!el) return;
-    const text = el.dataset.typewriter || "";
-    if (typewriterPlayed || reduceMotion) {
-      el.textContent = text;
-      return;
-    }
-    // Mark as played immediately (not on completion) so flipping mid-animation
-    // doesn't trigger a second, independent typewriter run on the other element.
-    typewriterPlayed = true;
-    el.textContent = "";
-    const cursor = document.createElement("span");
-    cursor.className = "cursor";
-    cursor.textContent = "|";
-    let i = 0;
-    function tick() {
-      el.textContent = text.slice(0, i);
-      el.appendChild(cursor);
-      if (i >= text.length) return;
-      i++;
-      const delay = 50 + Math.random() * 100;
-      setTimeout(tick, delay);
-    }
-    tick();
-  }
 
   // ---------- explainer flip (front <-> back preview) ----------
   document.querySelectorAll('[data-action="flip-explainer"]').forEach((el) => {
@@ -382,7 +352,6 @@
     el.addEventListener("click", () => {
       unlocked = false;
       developingStartedAt = null;
-      typewriterPlayed = false;
       if (developingTimerHandle) clearInterval(developingTimerHandle);
       document.querySelectorAll(".pc-fade").forEach((l) => l.classList.remove("pc-fade--in"));
       resetFlip();
