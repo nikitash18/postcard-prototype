@@ -12,6 +12,7 @@
 <body>
 
 <div class="stage">
+  <div class="phone-frame" id="phone-frame">
   <div class="phone" id="phone">
     <div class="notch"></div>
 
@@ -35,7 +36,7 @@
       <p class="explainer-copy" data-typewriter="Snap a photo. Come back tomorrow to reveal your developed postcard and share it with your friends!"></p>
       <div class="explainer-card" data-action="flip-explainer">
         <div class="composite-photo demo-photo-a">
-          <img class="inset-photo" src="assets/inset-a.svg" alt="" />
+          <img class="inset-photo" src="https://i.pravatar.cc/300?img=47" alt="" />
         </div>
         <span class="tap-hint">Tap to flip</span>
       </div>
@@ -51,7 +52,7 @@
       </header>
       <p class="explainer-copy" data-typewriter="Snap a photo. Come back tomorrow to reveal your developed postcard and share it with your friends!"></p>
       <div class="postcard postcard--explainer" data-action="flip-explainer">
-        <img class="postcard-thumb" src="assets/inset-a.svg" alt="" />
+        <div class="postcard-logo">BeReal.</div>
         <span class="tap-hint tap-hint--top">Flip back</span>
         <div class="postcard-lines">
           <div class="pc-col pc-col--left">
@@ -103,7 +104,7 @@
       </header>
       <div class="camera-card">
         <div class="camera-viewport" data-photo="scene-a">
-          <img class="inset-photo" src="assets/inset-a.svg" alt="" />
+          <img class="inset-photo" src="https://i.pravatar.cc/300?img=47" alt="" />
         </div>
       </div>
       <button class="cta-btn cta-btn--save" data-action="save">SAVE</button>
@@ -133,7 +134,21 @@
       <p class="developing-copy">Postcard is developing. Who are you sending it to?</p>
       <button class="pill-btn" data-action="add-friends">Add friends</button>
 
-      <button class="recent-photos-pill" data-action="restart-demo">View recent photos</button>
+      <nav class="tabbar">
+        <button class="tabbar-item tabbar-item--active" data-action="restart-demo">
+          <span class="tabbar-icon">⌂</span><span class="tabbar-label">Home</span>
+        </button>
+        <button class="tabbar-item tabbar-item--chat" data-action="restart-demo">
+          <span class="tabbar-icon">➤</span><span class="tabbar-label">Chat</span>
+        </button>
+        <button class="tabbar-camera" data-action="restart-demo" aria-label="Camera"></button>
+        <button class="tabbar-item" data-action="restart-demo">
+          <span class="tabbar-icon">▦</span><span class="tabbar-label">Memories</span>
+        </button>
+        <button class="tabbar-item tabbar-item--profile" data-action="restart-demo">
+          <span class="tabbar-avatar"><i class="tabbar-dot"></i></span><span class="tabbar-label">Profile</span>
+        </button>
+      </nav>
     </section>
 
     <!-- ===== SCREEN 6: Lock screen notification ===== -->
@@ -143,10 +158,10 @@
         <div class="lockscreen-time">9:41</div>
         <div class="lockscreen-date">Tuesday, 23 June</div>
         <div class="notif-banner" id="notif-banner" data-action="open-notification">
-          <img class="notif-icon" src="assets/inset-a.svg" alt="" />
+          <img class="notif-icon" src="https://i.pravatar.cc/300?img=47" alt="" />
           <div class="notif-text">
             <div class="notif-title-row">
-              <span class="notif-title">Your postcard is ready 💌</span>
+              <span class="notif-title">Your postcard is ready ❤️</span>
               <span class="notif-time">3m ago</span>
             </div>
             <span class="notif-sub">Tap to reveal yesterday's memory and share with friends!</span>
@@ -170,13 +185,13 @@
         <div class="flip-card" id="flip-card" data-action="flip-reveal">
           <div class="flip-face flip-face--front">
             <div class="camera-viewport camera-viewport--card reveal-dissolve" data-photo="scene-a" id="reveal-photo">
-              <img class="inset-photo" src="assets/inset-a.svg" alt="" />
+              <img class="inset-photo" src="https://i.pravatar.cc/300?img=47" alt="" />
             </div>
             <span class="tap-hint tap-hint--floating">Tap to flip</span>
           </div>
           <div class="flip-face flip-face--back">
             <div class="postcard postcard--reveal">
-              <img class="postcard-thumb" src="assets/inset-a.svg" alt="" />
+              <div class="postcard-logo">BeReal.</div>
               <span class="tap-hint tap-hint--top">Flip back</span>
               <div class="postcard-lines" id="postcard-lines-back2">
                 <div class="pc-col pc-col--left">
@@ -211,7 +226,7 @@
         <div class="share-sheet" data-stop>
           <div class="share-sheet-handle"></div>
           <div class="share-sheet-preview">
-            <div class="composite-photo demo-photo-a small"><img class="inset-photo" src="assets/inset-a.svg" alt="" /></div>
+            <div class="composite-photo demo-photo-a small"><img class="inset-photo" src="https://i.pravatar.cc/300?img=47" alt="" /></div>
             <span>Postcard.png</span>
           </div>
           <div class="share-sheet-row">
@@ -236,7 +251,21 @@
         <p class="empty-body">Your friends haven't posted their BeReal yet, be the first one.</p>
         <button class="pill-btn" data-action="force-capture">Take your BeReal</button>
       </div>
-      <button class="recent-photos-pill" data-action="restart-demo">View recent photos</button>
+      <nav class="tabbar">
+        <button class="tabbar-item tabbar-item--active" data-action="restart-demo">
+          <span class="tabbar-icon">⌂</span><span class="tabbar-label">Home</span>
+        </button>
+        <button class="tabbar-item tabbar-item--chat" data-action="restart-demo">
+          <span class="tabbar-icon">➤</span><span class="tabbar-label">Chat</span>
+        </button>
+        <button class="tabbar-camera" data-action="restart-demo" aria-label="Camera"></button>
+        <button class="tabbar-item" data-action="restart-demo">
+          <span class="tabbar-icon">▦</span><span class="tabbar-label">Memories</span>
+        </button>
+        <button class="tabbar-item tabbar-item--profile" data-action="restart-demo">
+          <span class="tabbar-avatar"><i class="tabbar-dot"></i></span><span class="tabbar-label">Profile</span>
+        </button>
+      </nav>
     </section>
 
     <!-- ===== SCREEN 9: Home feed w/ saved postcard (final) ===== -->
@@ -249,14 +278,29 @@
       <div class="filmroll-teaser">
         <span class="filmroll-label">Your film roll</span>
         <div class="filmroll-strip">
-          <div class="filmroll-thumb filmroll-thumb--filled"><img class="inset-photo" src="assets/inset-a.svg" alt="" /></div>
+          <div class="filmroll-thumb filmroll-thumb--filled"><img class="inset-photo" src="https://i.pravatar.cc/300?img=47" alt="" /></div>
           <div class="filmroll-thumb filmroll-thumb--next" data-action="restart-demo">+</div>
         </div>
         <p class="filmroll-caption">Saved to your profile. Come back tomorrow to keep the roll going.</p>
       </div>
-      <button class="recent-photos-pill" data-action="restart-demo">View recent photos</button>
+      <nav class="tabbar">
+        <button class="tabbar-item tabbar-item--active" data-action="restart-demo">
+          <span class="tabbar-icon">⌂</span><span class="tabbar-label">Home</span>
+        </button>
+        <button class="tabbar-item tabbar-item--chat" data-action="restart-demo">
+          <span class="tabbar-icon">➤</span><span class="tabbar-label">Chat</span>
+        </button>
+        <button class="tabbar-camera" data-action="restart-demo" aria-label="Camera"></button>
+        <button class="tabbar-item" data-action="restart-demo">
+          <span class="tabbar-icon">▦</span><span class="tabbar-label">Memories</span>
+        </button>
+        <button class="tabbar-item tabbar-item--profile" data-action="restart-demo">
+          <span class="tabbar-avatar"><i class="tabbar-dot"></i></span><span class="tabbar-label">Profile</span>
+        </button>
+      </nav>
     </section>
 
+  </div>
   </div>
 
   <!-- Dev-only analytics + fast-forward panel (toggle with the ⚙ tab) -->

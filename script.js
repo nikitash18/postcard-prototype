@@ -5,8 +5,24 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const phone = document.getElementById("phone");
+  const phoneFrame = document.getElementById("phone-frame");
   const screens = Array.from(document.querySelectorAll(".screen"));
   const devLogEl = document.getElementById("devpanel-log");
+
+  // Keep the 390x852 design at its exact proportions on every device by
+  // uniformly scaling it to fit, rather than letting CSS stretch/crop it.
+  const DESIGN_W = 390;
+  const DESIGN_H = 852;
+  function fitPhoneToViewport() {
+    const availW = window.innerWidth - 32;
+    const availH = window.innerHeight - 64;
+    const scale = Math.min(1, availW / DESIGN_W, availH / DESIGN_H);
+    phone.style.transform = `scale(${scale})`;
+    phoneFrame.style.width = `${DESIGN_W * scale}px`;
+    phoneFrame.style.height = `${DESIGN_H * scale}px`;
+  }
+  fitPhoneToViewport();
+  window.addEventListener("resize", fitPhoneToViewport);
 
   let currentScreen = "explainer-front";
   let permissionDenials = 0;

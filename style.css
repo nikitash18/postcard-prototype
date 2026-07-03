@@ -39,15 +39,20 @@ html, body {
   padding: 32px 16px;
 }
 
+.phone-frame {
+  width: var(--phone-w);
+  height: var(--phone-h);
+  flex-shrink: 0;
+}
 .phone {
   position: relative;
   width: var(--phone-w);
   height: var(--phone-h);
-  max-height: 92vh;
   background: var(--bg);
   border-radius: 46px;
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 10px #1c1c1e, 0 0 0 11px #3a3a3c;
+  transform-origin: top left;
 }
 
 /* iPhone 14 notch */
@@ -172,16 +177,9 @@ html, body {
 .composite-photo.small { width: 100%; height: 100%; }
 .demo-photo-a,
 .camera-viewport[data-photo="scene-a"] {
-  background:
-    radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,0.08), transparent 60%),
-    linear-gradient(180deg, #a9c4d6 0%, #c7d8dd 38%, #b9c3a4 42%, #7d8f66 100%);
-}
-.demo-photo-a::before,
-.camera-viewport[data-photo="scene-a"]::before {
-  content: "";
-  position: absolute; left: 0; right: 0; top: 34%; height: 10%;
-  background: repeating-linear-gradient(90deg, rgba(60,60,70,0.35) 0 14px, transparent 14px 34px);
-  opacity: 0.7;
+  background-image: url("https://picsum.photos/id/1015/600/800");
+  background-size: cover;
+  background-position: center;
 }
 .inset-photo {
   position: absolute;
@@ -216,16 +214,20 @@ html, body {
   filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4));
   /* zigzag clip-path applied at runtime by script.js (see applyZigzagBorders) */
 }
-.postcard-thumb {
+.postcard-logo {
   position: absolute;
   top: 8%; left: 7%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 20%;
   aspect-ratio: 75/91;
-  object-fit: cover;
-  border: 2px solid #000;
-  border-radius: 12%;
+  background: #000;
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  border-radius: 15%;
   box-shadow: 0 6px 14px rgba(0,0,0,0.35);
-  transform: rotate(-1.4deg);
 }
 .postcard-lines {
   position: absolute;
@@ -426,25 +428,61 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
 }
 .pill-btn:active { transform: scale(0.96); }
 
-/* ===== Bottom "View recent photos" pill ===== */
-.recent-photos-pill {
+/* ===== Bottom tab bar (Home / Chat / Camera / Memories / Profile) ===== */
+.tabbar {
   position: absolute;
-  bottom: 20px; left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 88px);
-  height: 49px;
-  border-radius: 45px;
+  bottom: 20px; left: 12px; right: 12px;
+  height: 60px;
+  border-radius: 30px;
+  background: rgba(28,28,30,0.92);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+.tabbar-item {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 20px;
+}
+.tabbar-item--active { color: #fff; }
+.tabbar-item--chat {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.tabbar-icon { font-size: 17px; line-height: 1; }
+.tabbar-label { font-size: 10px; font-weight: 600; letter-spacing: -0.1px; }
+.tabbar-camera {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #fff;
   border: none;
   cursor: pointer;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    linear-gradient(135deg, #4a4a4a, #1a1a1a);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
+  flex-shrink: 0;
 }
-.recent-photos-pill:active { transform: translateX(-50%) scale(0.97); }
+.tabbar-item--profile { position: relative; }
+.tabbar-avatar {
+  position: relative;
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a35ce8, #6c2bd9);
+}
+.tabbar-dot {
+  position: absolute;
+  top: -3px; right: -3px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff3b30;
+  border: 1.5px solid #1c1c1e;
+}
 
 /* ===== Lock screen ===== */
 .lockscreen {
@@ -750,7 +788,3 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
   .pc-fade { opacity: 1 !important; }
 }
 
-@media (max-width: 420px) {
-  .phone { border-radius: 0; box-shadow: none; width: 100vw; height: 100vh; max-height: 100vh; }
-  .stage { padding: 0; }
-}
