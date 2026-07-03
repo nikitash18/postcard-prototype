@@ -168,7 +168,12 @@ html, body {
 .composite-photo.small { width: 100%; height: 100%; }
 .demo-photo-a,
 .camera-viewport[data-photo="scene-a"] {
-  background-image: url("https://picsum.photos/id/1015/600/800");
+  background-image: url("assets/scene-capture.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.demo-photo-explainer {
+  background-image: url("assets/scene-explainer.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -356,7 +361,7 @@ html, body {
   content: "";
   position: absolute;
   inset: -12px;
-  background-image: url("https://picsum.photos/id/1015/600/800");
+  background-image: url("assets/scene-capture.jpg");
   background-size: cover;
   background-position: center;
   filter: blur(9px) brightness(0.55);

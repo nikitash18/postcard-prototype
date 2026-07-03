@@ -100,10 +100,6 @@
   }
 
   function onScreenShown(name) {
-    if (name === "explainer-front" || name === "explainer-back") {
-      const p = document.querySelector(`.screen[data-screen="${name}"] .explainer-copy`);
-      if (p) p.textContent = p.dataset.typewriter || "";
-    }
     if (name === "camera") {
       track("analog_capture_viewed", { screen_type: cameraContext });
     }
@@ -115,23 +111,7 @@
       track("postcard_revealed");
       resetFlip();
     }
-    if (name === "home-empty") {
-      if (suppressNextForceCapture) {
-        suppressNextForceCapture = false;
-      } else {
-        // Step 3: the forced capture overlay enforces itself the moment the
-        // user lands on the empty feed — not something they opt into.
-        clearTimeout(forceCaptureHandle);
-        forceCaptureHandle = setTimeout(() => {
-          if (currentScreen !== "home-empty") return;
-          cameraContext = "home_feed_fallback";
-          showScreen("camera");
-        }, 900);
-      }
-    }
   }
-  let forceCaptureHandle = null;
-  let suppressNextForceCapture = false;
 
   // ---------- explainer flip (front <-> back preview) ----------
   document.querySelectorAll('[data-action="flip-explainer"]').forEach((el) => {
@@ -174,10 +154,10 @@
     if (reduceMotion) return;
     const flash = document.createElement("div");
     flash.style.cssText =
-      "position:absolute;inset:0;background:#fff;z-index:60;pointer-events:none;opacity:0.9;";
+      "position:absolute;inset:0;background:#fff;z-index:60;pointer-events:none;opacity:0.5;";
     phone.appendChild(flash);
-    flash.animate([{ opacity: 0.9 }, { opacity: 0 }], { duration: 220, easing: "ease-out" });
-    setTimeout(() => flash.remove(), 240);
+    flash.animate([{ opacity: 0.5 }, { opacity: 0 }], { duration: 260, easing: "ease-out" });
+    setTimeout(() => flash.remove(), 280);
   }
 
   // ---------- post-capture: save ----------
@@ -205,7 +185,6 @@
   document.querySelector('[data-action="permission-deny"]')?.addEventListener("click", () => {
     document.querySelector('[data-screen="camera"] [data-modal="permission"]').hidden = true;
     // "Don't Allow" sends the user straight back to the feed.
-    suppressNextForceCapture = true;
     showScreen("home-empty");
   });
 
@@ -228,26 +207,31 @@
   // notification fires — matching the real 24h lock without the actual wait.
   document.querySelector('[data-action="exit-app"]').addEventListener("click", () => {
     developingStartedAt = Date.now() - DEV_DURATION_MS;
+    checkDevelopingComplete();
   });
+
+  function checkDevelopingComplete() {
+    const elapsed = Date.now() - developingStartedAt;
+    if (elapsed >= DEV_DURATION_MS) {
+      clearInterval(developingTimerHandle);
+      unlocked = true;
+      goToLockscreen();
+      return true;
+    }
+    return false;
+  }
 
   function startDevelopingTimer() {
     if (developingTimerHandle) clearInterval(developingTimerHandle);
     if (!developingStartedAt) developingStartedAt = Date.now();
-
-    function tick() {
-      const elapsed = Date.now() - developingStartedAt;
-      if (elapsed >= DEV_DURATION_MS) {
-        clearInterval(developingTimerHandle);
-        unlocked = true;
-        goToLockscreen();
-      }
-    }
-    developingTimerHandle = setInterval(tick, 250);
+    if (checkDevelopingComplete()) return;
+    developingTimerHandle = setInterval(checkDevelopingComplete, 250);
   }
 
   document.querySelector('[data-action="skip-timer"]').addEventListener("click", () => {
     if (currentScreen !== "developing") showScreen("developing");
     developingStartedAt = Date.now() - DEV_DURATION_MS;
+    checkDevelopingComplete();
   });
 
   // ---------- edge-case demo triggers ----------
