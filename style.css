@@ -55,18 +55,6 @@ html, body {
   transform-origin: top left;
 }
 
-/* iPhone 14 notch */
-.notch {
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 154px;
-  height: 30px;
-  background: #000;
-  border-radius: 0 0 20px 20px;
-  z-index: 90;
-}
-
 /* ===== Status bar ===== */
 .statusbar {
   position: absolute;
@@ -112,7 +100,6 @@ html, body {
   padding: 10px 18px;
   z-index: 20;
 }
-.bar--overlay { position: absolute; top: 54px; left: 0; right: 0; }
 .bar-spacer { width: 40px; }
 .wordmark {
   font-weight: 800;
@@ -276,21 +263,20 @@ html, body {
   cursor: pointer;
 }
 .cta-btn:active { opacity: 0.6; }
-.cta-btn--save, .cta-btn--share {
-  position: absolute;
-  bottom: 40px; left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-}
 
 /* ===== Camera ===== */
+/* Card is fixed-proportion (matches the 371x507 Figma card), not stretched
+   to fill the screen — controls sit in normal flow in the black space below
+   it, matching the design, instead of overlapping the photo. */
 .camera-card {
   position: relative;
-  flex: 1;
-  margin: 2px 10px 16px;
+  width: calc(100% - 20px);
+  aspect-ratio: 371 / 507;
+  margin: 0 auto;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  flex-shrink: 0;
 }
 .camera-viewport {
   position: relative;
@@ -309,11 +295,12 @@ html, body {
   to { filter: blur(0) brightness(1); opacity: 1; }
 }
 .camera-controls {
-  position: absolute;
-  bottom: 34px; left: 0; right: 0;
+  flex: 1;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 18px;
 }
 .mode-toggle {
@@ -534,12 +521,10 @@ body.anim-paused .developing-card::after { animation-play-state: paused; }
 
 /* ===== Flip / reveal ===== */
 .flip-container {
-  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
   perspective: 1200px;
-  margin-top: -20px;
+  flex-shrink: 0;
 }
 .flip-card {
   position: relative;
