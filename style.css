@@ -374,7 +374,7 @@ html, body {
   z-index: 1;
   font-family: "Rubik Distressed", sans-serif;
   font-weight: 400;
-  font-size: 78px;
+  font-size: 62px;
   letter-spacing: 0.01em;
   white-space: nowrap;
   color: #3e3e3e;
@@ -384,10 +384,10 @@ html, body {
 .developing-tagline {
   position: relative;
   z-index: 1;
-  margin-top: -28px;
-  margin-left: 170px;
+  margin-top: -24px;
+  margin-left: 135px;
   font-family: var(--hand);
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 400;
   white-space: nowrap;
   color: #3e3e3e;
