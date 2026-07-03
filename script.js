@@ -71,6 +71,39 @@
     });
   }
 
+  // ---------- perforated stamp-edge border (Developing card) ----------
+  // Builds a clip-path polygon with small rounded scallop bumps along each
+  // edge, like a postage stamp's punched perforation.
+  function buildScallopPolygon(bumpsX, bumpsY, depthPct, pointsPerBump) {
+    const pts = [];
+    const stepX = 100 / bumpsX;
+    const stepY = 100 / bumpsY;
+    function addEdge(count, step, axisFromFn) {
+      for (let i = 0; i < count; i++) {
+        const a0 = i * step;
+        const a1 = (i + 1) * step;
+        for (let j = 0; j <= pointsPerBump; j++) {
+          const t = j / pointsPerBump;
+          const a = a0 + t * (a1 - a0);
+          const bump = Math.sin(t * Math.PI) * depthPct;
+          pts.push(axisFromFn(a, bump));
+        }
+      }
+    }
+    addEdge(bumpsX, stepX, (a, b) => `${a}% ${b}%`); // top
+    addEdge(bumpsY, stepY, (a, b) => `${100 - b}% ${a}%`); // right
+    addEdge(bumpsX, stepX, (a, b) => `${100 - a}% ${100 - b}%`); // bottom
+    addEdge(bumpsY, stepY, (a, b) => `${b}% ${100 - a}%`); // left
+    return `polygon(${pts.join(", ")})`;
+  }
+
+  function applyScallopBorder() {
+    const polygon = buildScallopPolygon(15, 20, 1.6, 6);
+    document.querySelectorAll(".developing-card").forEach((el) => {
+      el.style.clipPath = polygon;
+    });
+  }
+
   // ---------- analytics ----------
   function track(event, props) {
     const line = `${event}${props ? " " + JSON.stringify(props) : ""}`;
@@ -349,5 +382,6 @@
 
   // ---------- init ----------
   applyZigzagBorders();
+  applyScallopBorder();
   showScreen("explainer-front");
 })();

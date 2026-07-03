@@ -372,23 +372,26 @@ html, body {
 .developing-stamp {
   position: relative;
   z-index: 1;
-  font-weight: 900;
+  font-family: "Rubik Distressed", sans-serif;
+  font-weight: 400;
   font-size: 50px;
   letter-spacing: 0.01em;
   white-space: nowrap;
   color: rgba(255,255,255,0.92);
-  transform: rotate(-20deg);
+  transform: rotate(-48.38deg);
   text-shadow: 0 2px 12px rgba(0,0,0,0.6);
 }
 .developing-tagline {
   position: relative;
   z-index: 1;
-  margin-top: 6px;
-  font-size: 15px;
-  font-weight: 600;
+  margin-top: -20px;
+  margin-left: 110px;
+  font-family: var(--hand);
+  font-size: 21px;
+  font-weight: 400;
   white-space: nowrap;
-  color: rgba(255,255,255,0.6);
-  transform: rotate(-20deg);
+  color: rgba(255,255,255,0.75);
+  transform: rotate(-48.38deg);
   text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 .developing-card.wobble { animation: wobble 0.3s ease; }
