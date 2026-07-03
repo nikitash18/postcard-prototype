@@ -224,6 +224,7 @@ html, body {
   font-size: 13px;
   border-radius: 15%;
   box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transform: rotate(-1.39deg);
 }
 .postcard-lines {
   position: absolute;
