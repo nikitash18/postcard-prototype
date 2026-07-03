@@ -377,9 +377,9 @@ html, body {
   font-size: 50px;
   letter-spacing: 0.01em;
   white-space: nowrap;
-  color: rgba(255,255,255,0.92);
+  color: #3e3e3e;
   transform: rotate(-48.38deg);
-  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.3);
 }
 .developing-tagline {
   position: relative;
@@ -390,9 +390,9 @@ html, body {
   font-size: 21px;
   font-weight: 400;
   white-space: nowrap;
-  color: rgba(255,255,255,0.75);
+  color: #3e3e3e;
   transform: rotate(-48.38deg);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  text-shadow: none;
 }
 .developing-card.wobble { animation: wobble 0.3s ease; }
 @keyframes wobble {
